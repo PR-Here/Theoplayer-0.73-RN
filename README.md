@@ -55,6 +55,8 @@ Before you begin, ensure you have the following installed on your Windows machin
    ```bash
    npm install
    ```
+   
+   This will automatically apply the patches to `react-native-theoplayer` using `patch-package`.
 
 3. **Install iOS dependencies (if on macOS):**
    ```bash
@@ -104,14 +106,21 @@ npx react-native run-ios
 
 ## Important Notes for THEOplayer v9.0.0
 
-### Patches Applied
+### Patches Applied with patch-package
 
-This project includes patches to fix compatibility issues with react-native-theoplayer v9.0.0:
+This project uses `patch-package` to automatically apply fixes for compatibility issues with react-native-theoplayer v9.0.0. The patches are stored in the `patches/` directory and are automatically applied when you run `npm install`.
 
-1. **KeySystemAdapter.kt** - Added CLEAR_KEY case
-2. **SourceAdapter.kt** - Fixed type mismatch for metadata HashMap
-3. **Kotlin version** - Set to 1.9.10 for compatibility
-4. **Gradle configuration** - Force Kotlin stdlib version resolution
+**Patches include:**
+
+1. **KeySystemAdapter.kt** - Added CLEAR_KEY case to the when expression
+2. **SourceAdapter.kt** - Fixed type mismatch by changing `HashMap<String, Any>` to `MutableMap<String, Any?>`
+
+These patches are preserved even after running `npm install` or `npm ci`.
+
+**Note:** If you need to modify the patches:
+1. Make changes directly in `node_modules/react-native-theoplayer/`
+2. Run `npx patch-package react-native-theoplayer`
+3. Commit the updated patch file in the `patches/` directory
 
 ### Build Configuration
 
