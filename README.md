@@ -1,3 +1,206 @@
+# React Native THEOplayer App
+
+A React Native application integrated with THEOplayer v9.0.0 for video playback.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed on your Windows machine:
+
+- **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
+- **JDK 17** - [Download](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- **Android Studio** - [Download](https://developer.android.com/studio)
+- **Git** - [Download](https://git-scm.com/download/win)
+
+## Android Studio Setup
+
+1. **Install Android Studio** and open it
+2. Go to **Settings** → **Appearance & Behavior** → **System Settings** → **Android SDK**
+3. Install the following:
+   - Android SDK Platform 35
+   - Android SDK Build-Tools 34.0.0
+   - Android SDK Command-line Tools
+   - Android Emulator
+   - Android SDK Platform-Tools
+
+4. **Set Environment Variables:**
+   - Open **System Environment Variables**
+   - Add/Update the following:
+     ```
+     ANDROID_HOME = C:\Users\YourUsername\AppData\Local\Android\Sdk
+     JAVA_HOME = C:\Program Files\Java\jdk-17
+     ```
+   - Add to **Path**:
+     ```
+     %ANDROID_HOME%\platform-tools
+     %ANDROID_HOME%\tools
+     %ANDROID_HOME%\tools\bin
+     %JAVA_HOME%\bin
+     ```
+
+5. **Create an Android Virtual Device (AVD):**
+   - Open Android Studio → **Device Manager**
+   - Click **Create Device**
+   - Select a device (e.g., Pixel 5)
+   - Select System Image: **Android 12 (API Level 31)** or higher
+   - Click **Finish**
+
+## Installation Steps
+
+1. **Clone or navigate to the project directory:**
+   ```bash
+   cd path\to\MyApp
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Install iOS dependencies (if on macOS):**
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+## Running the Application
+
+### Start Metro Bundler
+
+Open a terminal and run:
+```bash
+npm start
+```
+
+Keep this terminal running.
+
+### Run on Android
+
+Open a **new terminal** and run:
+```bash
+npm run android
+```
+
+Or alternatively:
+```bash
+npx react-native run-android
+```
+
+This will:
+- Build the Android app
+- Install it on the emulator or connected device
+- Launch the app
+
+### Run on iOS (macOS only)
+
+```bash
+npm run ios
+```
+
+Or:
+```bash
+npx react-native run-ios
+```
+
+## Important Notes for THEOplayer v9.0.0
+
+### Patches Applied
+
+This project includes patches to fix compatibility issues with react-native-theoplayer v9.0.0:
+
+1. **KeySystemAdapter.kt** - Added CLEAR_KEY case
+2. **SourceAdapter.kt** - Fixed type mismatch for metadata HashMap
+3. **Kotlin version** - Set to 1.9.10 for compatibility
+4. **Gradle configuration** - Force Kotlin stdlib version resolution
+
+### Build Configuration
+
+The following configurations have been applied:
+
+- **Android SDK**: 35
+- **Kotlin Version**: 1.9.10
+- **Android Gradle Plugin**: 8.3.0
+- **Min SDK**: 23
+- **Target SDK**: 35
+
+## Troubleshooting
+
+### Build Fails with Kotlin Errors
+
+If you encounter Kotlin compilation errors:
+```bash
+cd android
+gradlew clean
+cd ..
+npm run android
+```
+
+### Metro Bundler Issues
+
+If Metro bundler has issues:
+```bash
+npm start -- --reset-cache
+```
+
+### Cannot Connect to Development Server
+
+1. Ensure your emulator and development machine are on the same network
+2. Check if Metro bundler is running
+3. Try reloading the app: Press `R` twice in the emulator
+
+### Black Screen on Android
+
+1. Check Metro bundler terminal for errors
+2. Open the app and shake the device (Ctrl+M on emulator)
+3. Select "Reload"
+4. Check the debug console for status messages
+
+### Missing Environment Variables
+
+Restart your computer after setting environment variables for them to take effect.
+
+## Project Structure
+
+```
+MyApp/
+├── android/               # Android native code
+├── ios/                   # iOS native code (macOS only)
+├── node_modules/          # Dependencies
+├── App.tsx               # Main app component with THEOplayer
+├── package.json          # Project dependencies
+└── README.md            # This file
+```
+
+## THEOplayer Configuration
+
+The app is configured with a THEOplayer license. You can update the license in `App.tsx`:
+
+```typescript
+const playerConfig = {
+  license: 'YOUR_LICENSE_KEY_HERE',
+};
+```
+
+## Available Scripts
+
+- `npm start` - Start Metro bundler
+- `npm run android` - Run on Android
+- `npm run ios` - Run on iOS (macOS only)
+- `npm test` - Run tests
+- `npm run lint` - Run ESLint
+
+## Support
+
+For THEOplayer documentation and support, visit:
+- [THEOplayer Documentation](https://docs.theoplayer.com/)
+- [React Native THEOplayer](https://github.com/THEOplayer/react-native-theoplayer)
+
+## License
+
+This project uses THEOplayer which requires a valid license for production use.
+
+---
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
