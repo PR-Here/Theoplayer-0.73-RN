@@ -8,6 +8,16 @@ require Pod::Executable.execute_command('node', ['-p',
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
+# Pre-install hook for Youbora connector
+pre_install do |installer|
+  youbora_target = installer.pod_targets.find { |t| t.name == "YouboraTHEOPlayerAdapter" }
+  theoplayer_target = installer.pod_targets.find { |t| t.name == "THEOplayerSDK-core"}
+  if youbora_target && theoplayer_target
+    puts "Adding THEOplayerSDK-core as a target dependency to YouboraTHEOPlayerAdapter"
+    youbora_target.dependent_targets << theoplayer_target
+  end
+end
+
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
 #

@@ -64,6 +64,34 @@ Before you begin, ensure you have the following installed on your Windows machin
    pod install
    cd ..
    ```
+   
+   **Note:** The Podfile includes a pre-install hook for the Youbora connector to properly link with THEOplayerSDK.
+
+## Youbora Analytics Integration
+
+This project includes **Youbora analytics connector** (`@theoplayer/react-native-analytics-youbora`) for tracking video playback analytics.
+
+### Configuration
+
+The Youbora connector is configured in `App.tsx`:
+
+```typescript
+const youboraOptions: youbora.Options = {
+  accountCode: 'powerdev', // Replace with your account code
+  'content.isLive': false,
+  'content.title': 'Video Title',
+  'content.duration': 596,
+};
+```
+
+**Replace `'powerdev'` with your actual Youbora account code.**
+
+### Features
+
+- Automatic tracking of playback events
+- Content metadata reporting
+- Error tracking
+- Debug logging support
 
 ## Running the Application
 
